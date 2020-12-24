@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM timeloopaccelergy/accelergy-timeloop-infrastructure:latest
 
 RUN apt-get update && apt-get install -y \
     curl \
@@ -23,4 +23,14 @@ RUN conda install -y python=3.8 && \
 RUN conda install pytorch torchvision cpuonly -c pytorch \
  && conda clean -ya
 
+
+ENV SRC_DIR=/usr/local/src
+ENV BIN_DIR=/usr/local/bin
+
 EXPOSE 8888
+
+WORKDIR /home/workspace/
+
+COPY docker-entrypoint.sh $BIN_DIR
+ENTRYPOINT ["bash", "docker-entrypoint.sh"]
+
