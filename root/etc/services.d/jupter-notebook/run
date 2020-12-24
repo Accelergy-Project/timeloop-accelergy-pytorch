@@ -1,0 +1,20 @@
+#!/usr/bin/with-contenv bash
+
+UMASK_SET=${UMASK_SET:-022}
+umask "$UMASK_SET"
+
+# Set default environment variables
+source /usr/local/src/dot.bashrc
+
+# Set HOME/SHELL so the user jupyter notebook shell works
+export HOME=/home/workspace
+export SHELL=/bin/bash
+
+# Switch to user home directory
+cd $HOME
+
+echo "Starting Jupter Notebook."
+exec \
+	s6-setuidgid workspace \
+        /usr/local/bin/conda/bin/jupyter-notebook --ip=0.0.0.0 --no-browser
+
