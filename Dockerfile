@@ -31,6 +31,9 @@ EXPOSE 8888
 
 WORKDIR /home/workspace/
 
+COPY src/dot.bashrc $SRC_DIR
+COPY src/dot.profile $SRC_DIR
+
 COPY docker-entrypoint.sh $BIN_DIR
 ENTRYPOINT ["bash", "docker-entrypoint.sh"]
 

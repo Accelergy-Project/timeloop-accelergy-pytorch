@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Set UID/GID if not provided with enviromental variable(s).
 if [ -z "$USER_UID" ]; then
@@ -24,10 +24,17 @@ fi
 usermod -u $USER_UID -g $USER_GID --non-unique workspace > /dev/null 2>&1
 chsh -s /bin/bash workspace
 
-# Set shorter prompt name if there is no custom setup in users' own directories
+# Copy in default .profile if not already there
+if [ ! -e /home/workspace/.profile ]
+then
+    cp /usr/local/src/dot.profile /home/workspace/.profile
+    chown $USER_UID:$USER_GID /home/workspace/.profile
+fi
+
+# Copy in default bashrc if not already there
 if [ ! -e /home/workspace/.bashrc ]
 then
-    cp /usr/local/src/.bashrc /home/workspace/.bashrc
+    cp /usr/local/src/dot.bashrc /home/workspace/.bashrc
     chown $USER_UID:$USER_GID /home/workspace/.bashrc
 fi
 
@@ -53,16 +60,15 @@ fi
 chown $USER_UID:$USER_GID /home/workspace
 chmod 755 /home/workspace
 
-# Default environment variable for Timeloop
-export TIMELOOP_ACCURATE_READS_WITU=1
-export PATH=/usr/local/bin/conda/bin:$PATH
+# Default environment variables
+source /home/workspace/.bashrc
 
-echo dollar-at = $@
-
-if [ "$@" != "bash" ] 
+if [[ "$@" != "" ]] 
 then
     echo "Command: >>> $@ <<<"
     exec "$@"
 fi
 
-exec su -c "/usr/local/bin/conda/bin/jupyter-notebook --ip=0.0.0.0" - workspace
+echo "Runing jupyter notebook"
+cd /home/workspace
+exec su -c "/usr/local/bin/conda/bin/jupyter-notebook --ip=0.0.0.0 --no-browser" - workspace
