@@ -49,6 +49,21 @@ RUN conda install -y python=3.8 && \
 RUN conda install pytorch torchvision cpuonly -c pytorch && \
     conda clean -ya
 
+RUN python3 -m pip install git+https://github.com/Accelergy-Project/pytorch2timeloop-converter
+
+RUN echo "**** install required packages ****" && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+               libgl1 \
+               fonts-freefont-ttf \
+               ttf-dejavu-core && \
+    echo "**** cleanup ****" && \
+    apt-get clean && \
+    rm -rf \
+       /tmp/* \
+       /var/lib/apt/lists/*
+
+RUN python3 -m pip install git+https://github.com/Fibertree-Project/fibertree
 
 EXPOSE 8888
 
