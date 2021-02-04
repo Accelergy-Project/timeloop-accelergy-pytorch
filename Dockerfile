@@ -41,6 +41,7 @@ RUN wget -O ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest
     rm ~/miniconda.sh
 
 ENV PATH=$BIN_DIR/conda/bin:$PATH
+
 RUN conda install -y python=3.8 && \
     conda install pandas numpy scipy matplotlib ipykernel jupyter && \
     pip install plyplus pyyaml && \
@@ -49,8 +50,14 @@ RUN conda install -y python=3.8 && \
 RUN conda install pytorch torchvision cpuonly -c pytorch && \
     conda clean -ya
 
+#
+# Install pytorch2timeloop converter
+#
 RUN python3 -m pip install git+https://github.com/Accelergy-Project/pytorch2timeloop-converter
 
+#
+# Install fibertree and associated requirements
+#
 RUN echo "**** install required packages ****" && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -65,11 +72,26 @@ RUN echo "**** install required packages ****" && \
 
 RUN python3 -m pip install git+https://github.com/Fibertree-Project/fibertree
 
-EXPOSE 8888
+#
+# Set up root
+#
+COPY /root /
 
+USER $NB_USER
 WORKDIR /home/workspace/
 
-COPY /root /
+#
+# Install notebook extension
+#
+RUN pip install --no-cache  jupyter_nbextensions_configurator && \
+    pip install git+https://github.com/NII-cloud-operation/Jupyter-LC_index
+
+RUN jupyter nbextensions_configurator enable --user && \
+    jupyter nbextension install --py --user notebook_index && \
+    jupyter nbextension enable --py --user notebook_index
+
+
+EXPOSE 8888
 
 ENTRYPOINT ["/init"]
 
