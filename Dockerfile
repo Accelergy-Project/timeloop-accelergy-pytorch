@@ -86,9 +86,9 @@ WORKDIR /home/workspace/
 RUN pip install --no-cache  jupyter_nbextensions_configurator && \
     pip install git+https://github.com/NII-cloud-operation/Jupyter-LC_index
 
-RUN jupyter nbextensions_configurator enable --user && \
-    jupyter nbextension install --py --user notebook_index && \
-    jupyter nbextension enable --py --user notebook_index
+RUN jupyter nbextensions_configurator enable --sys-prefix  && \
+    jupyter nbextension install --py  notebook_index --sys-prefix && \
+    jupyter nbextension enable --py  notebook_index --sys-prefix
 
 
 EXPOSE 8888
