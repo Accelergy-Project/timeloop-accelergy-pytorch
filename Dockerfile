@@ -69,6 +69,8 @@ RUN conda install -y python=3.8 && \
 RUN conda install pytorch torchvision cpuonly -c pytorch && \
     conda clean -ya
 
+RUN python3 -m pip install torchprofile
+
 #
 # Install pytorch2timeloop converter
 #
