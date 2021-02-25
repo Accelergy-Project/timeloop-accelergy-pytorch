@@ -1,5 +1,24 @@
 FROM timeloopaccelergy/accelergy-timeloop-infrastructure:latest
 
+LABEL maintainer="timeloop-accelergy@mit.edu"
+
+# Arguments
+ARG BUILD_DATE
+ARG VCS_REF
+ARG BUILD_VERSION
+
+# Labels - org.local-schema
+LABEL org.label-schema.schema-version="1.0"
+LABEL org.label-schema.build-date=$BUILD_DATE
+LABEL org.label-schema.name="mitdlh/timeloop-accelergy-pytorch"
+LABEL org.label-schema.description="Infrastructure for Timeloop/Accelergy and Pytorch"
+LABEL org.label-schema.url="http://accelergy.mit.edu/"
+LABEL org.label-schema.vcs-url="https://github.com/Accelergy-Project/timeloop-accelergy-pytorch"
+LABEL org.label-schema.vcs-ref=$VCS_REF
+LABEL org.label-schema.vendor="Emer"
+LABEL org.label-schema.version=$BUILD_VERSION
+LABEL org.label-schema.docker.cmd="docker run -it --rm -v ~/workspace:/home/workspace mitdlh/timeloop-accelergy-pytorch"
+
 ENV SRC_DIR=/usr/local/src
 ENV BIN_DIR=/usr/local/bin
 
