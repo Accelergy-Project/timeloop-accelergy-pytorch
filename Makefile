@@ -53,8 +53,8 @@ build:
 # Push docker image
 
 push:
-	@echo "Pushing ${NAME}"
-	"${DOCKER_EXE}" push ${NAME}
+	@echo "Pushing ${NAME}:${ALTTAG}"
+	"${DOCKER_EXE}" push ${NAME}:${ALTTAG}
  
 
 # Lint the Dockerfile
