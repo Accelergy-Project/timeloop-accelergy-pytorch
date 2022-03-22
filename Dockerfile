@@ -1,4 +1,4 @@
-FROM timeloopaccelergy/accelergy-timeloop-infrastructure:dev
+FROM timeloopaccelergy/accelergy-timeloop-infrastructure:latest
 
 LABEL maintainer="timeloop-accelergy@mit.edu"
 
