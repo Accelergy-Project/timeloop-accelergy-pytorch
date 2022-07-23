@@ -1,4 +1,4 @@
-FROM timeloopaccelergy/accelergy-timeloop-infrastructure:latest
+FROM timeloopaccelergy/accelergy-timeloop-infrastructure:micro22-artifact
 
 LABEL maintainer="timeloop-accelergy@mit.edu"
 
