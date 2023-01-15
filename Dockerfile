@@ -46,12 +46,11 @@ RUN echo "**** create container user and make folders ****" && \
 #
 # Python tools
 #
-RUN conda install pandas numpy scipy matplotlib ipykernel jupyter && \
-    pip install plyplus pyyaml && \
-    conda clean -ya
+RUN pip3 install pandas numpy scipy matplotlib ipykernel jupyter && \
+    pip3 install plyplus pyyaml
 
-RUN conda install pytorch torchvision cpuonly -c pytorch && \
-    conda clean -ya
+RUN pip3 install torch torchvision torchaudio \
+    --extra-index-url https://download.pytorch.org/whl/cpu
 
 RUN python3 -m pip install torchprofile
 
@@ -88,8 +87,8 @@ WORKDIR /home/workspace/
 #
 # Install notebook extension
 #
-RUN pip install --no-cache  jupyter_nbextensions_configurator && \
-    pip install git+https://github.com/NII-cloud-operation/Jupyter-LC_index
+RUN pip3 install --no-cache  jupyter_nbextensions_configurator && \
+    pip3 install git+https://github.com/NII-cloud-operation/Jupyter-LC_index
 
 RUN jupyter nbextensions_configurator enable --sys-prefix  && \
     jupyter nbextension install --py  notebook_index --sys-prefix && \
