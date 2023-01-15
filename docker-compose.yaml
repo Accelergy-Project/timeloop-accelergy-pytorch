@@ -24,6 +24,7 @@ services:
   labs:
     hostname: labs
     image: mitdlh/timeloop-accelergy-pytorch:latest
+    build: .
     ports:
       - "8888:8888"
     volumes:
