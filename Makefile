@@ -46,7 +46,7 @@ build-amd64:
           --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
           --build-arg VCS_REF=${TAG} \
           --build-arg BUILD_VERSION=${VERSION} \
-					--build-arg OVERLAY_ARCH=amd64 \
+          --build-arg OVERLAY_ARCH=amd64 \
           -t ${IMG}-amd64 .
 	"${DOCKER_EXE}" tag ${IMG}-amd64 ${ALTIMG}-amd64
 
@@ -55,7 +55,7 @@ build-arm64:
           --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
           --build-arg VCS_REF=${TAG} \
           --build-arg BUILD_VERSION=${VERSION} \
-					--build-arg OVERLAY_ARCH=aarch64 \
+          --build-arg OVERLAY_ARCH=aarch64 \
           -t ${IMG}-arm64 .
 	"${DOCKER_EXE}" tag ${IMG}-arm64 ${ALTIMG}-arm64
 
