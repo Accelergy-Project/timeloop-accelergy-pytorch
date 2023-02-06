@@ -36,7 +36,7 @@ all:	build
 # Pull all submodules
 
 pull:
-	git submodule foreach git pull origin master
+	git submodule update --remote --merge
 
 
 # Build and tag docker image
@@ -47,6 +47,7 @@ build-amd64:
           --build-arg VCS_REF=${TAG} \
           --build-arg BUILD_VERSION=${VERSION} \
           --build-arg OVERLAY_ARCH=amd64 \
+          --build-arg ARCH=amd64 \
           -t ${IMG}-amd64 .
 	"${DOCKER_EXE}" tag ${IMG}-amd64 ${ALTIMG}-amd64
 
@@ -56,11 +57,9 @@ build-arm64:
           --build-arg VCS_REF=${TAG} \
           --build-arg BUILD_VERSION=${VERSION} \
           --build-arg OVERLAY_ARCH=aarch64 \
+          --build-arg ARCH=arm64 \
           -t ${IMG}-arm64 .
 	"${DOCKER_EXE}" tag ${IMG}-arm64 ${ALTIMG}-arm64
-
-build: build-amd64 build-arm64
-
 
 # Push docker image
 
@@ -68,25 +67,11 @@ push-amd64:
 	@echo "Pushing ${NAME}:${ALTTAG}-amd64"
 	#Push Amd64 version 
 	"${DOCKER_EXE}" push ${NAME}:${ALTTAG}-amd64
-	#Combine Amd64 version into multi-architecture docker image.
-	"${DOCKER_EXE}" manifest create \
-		${NAME}:${ALTTAG} \
-		--amend ${NAME}:${ALTTAG}-amd64 \
-	  --amend ${NAME}:${ALTTAG}-arm64 
-	"${DOCKER_EXE}" manifest push ${NAME}:${ALTTAG}
 
 push-arm64:
 	@echo "Pushing ${NAME}:${ALTTAG}-arm64"
 	#Push Arm64 version 
 	"${DOCKER_EXE}" push ${NAME}:${ALTTAG}-arm64
-	#Combine Arm64 version into multi-architecture docker image.
-	"${DOCKER_EXE}" manifest create \
-		${NAME}:${ALTTAG} \
-		--amend ${NAME}:${ALTTAG}-amd64 \
-	  --amend ${NAME}:${ALTTAG}-arm64 
-	"${DOCKER_EXE}" manifest push ${NAME}:${ALTTAG}
-
-push: push-amd64 push-arm64
 
 # Lint the Dockerfile
 

@@ -1,4 +1,5 @@
-FROM timeloopaccelergy/accelergy-timeloop-infrastructure:latest
+ARG ARCH="amd64"
+FROM timeloopaccelergy/accelergy-timeloop-infrastructure:latest-${ARCH}
 
 LABEL maintainer="timeloop-accelergy@mit.edu"
 
