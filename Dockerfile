@@ -95,6 +95,10 @@ RUN jupyter nbextensions_configurator enable --sys-prefix  && \
     jupyter nbextension install --py  notebook_index --sys-prefix && \
     jupyter nbextension enable --py  notebook_index --sys-prefix
 
+#
+# Install Yaml Widgets
+#
+RUN python3 -m pip install git+https://github.com/jsemer/yamlwidgets
 
 EXPOSE 8888
 
