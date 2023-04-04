@@ -47,7 +47,7 @@ RUN echo "**** create container user and make folders ****" && \
 #
 # Python tools
 #
-RUN pip3 install pandas numpy scipy matplotlib ipykernel jupyter && \
+RUN pip3 install pandas seaborn numpy scipy matplotlib ipykernel jupyter && \
     pip3 install plyplus pyyaml
 
 RUN pip3 install torch torchvision torchaudio \
