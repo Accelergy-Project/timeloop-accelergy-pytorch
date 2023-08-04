@@ -75,11 +75,11 @@ RUN echo "**** install required packages ****" && \
        /tmp/* \
        /var/lib/apt/lists/*
 
-RUN python3 -m pip install git+https://github.com/Fibertree-Project/fibertree
 
-COPY /src/teaal-compiler /src/teaal-compiler
-RUN cd /src/teaal-compiler \
-    python3 -m pip install .
+
+RUN python3 -m pip install git+https://github.com/FPSG-UIUC/fibertree.git@metrics
+RUN python3 -m pip install git+https://github.com/FPSG-UIUC/teaal-compiler.git@modeling
+
 
 #
 # Set up root
