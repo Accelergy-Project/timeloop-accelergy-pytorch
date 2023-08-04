@@ -16,5 +16,5 @@ cd $HOME
 echo "Starting Jupter Notebook."
 exec \
 	s6-setuidgid workspace \
-        /usr/local/bin/jupyter-notebook --ip=0.0.0.0 --no-browser ${JUPYTER_SWITCHES}
+        /usr/local/bin/jupyter-lab --ip=0.0.0.0 --no-browser ${JUPYTER_SWITCHES}
 

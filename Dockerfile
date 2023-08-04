@@ -11,14 +11,14 @@ ARG BUILD_VERSION
 # Labels - org.local-schema
 LABEL org.label-schema.schema-version="1.0"
 LABEL org.label-schema.build-date=$BUILD_DATE
-LABEL org.label-schema.name="mitdlh/timeloop-accelergy-pytorch"
+LABEL org.label-schema.name="Accelergy-Project/timeloop-accelergy-pytorch"
 LABEL org.label-schema.description="Infrastructure for Timeloop/Accelergy and Pytorch"
 LABEL org.label-schema.url="http://accelergy.mit.edu/"
 LABEL org.label-schema.vcs-url="https://github.com/Accelergy-Project/timeloop-accelergy-pytorch"
 LABEL org.label-schema.vcs-ref=$VCS_REF
 LABEL org.label-schema.vendor="Emer"
 LABEL org.label-schema.version=$BUILD_VERSION
-LABEL org.label-schema.docker.cmd="docker run -it --rm -v ~/workspace:/home/workspace mitdlh/timeloop-accelergy-pytorch"
+LABEL org.label-schema.docker.cmd="docker run -it --rm -v ~/workspace:/home/workspace timeloopaccelergy/timeloop-accelergy-pytorch"
 
 ENV SRC_DIR=/usr/local/src
 ENV LIB_DIR=/usr/local/lib
@@ -88,12 +88,12 @@ WORKDIR /home/workspace/
 #
 # Install notebook extension
 #
-RUN pip3 install --no-cache  jupyter_nbextensions_configurator && \
-    pip3 install git+https://github.com/NII-cloud-operation/Jupyter-LC_index
+#RUN pip3 install --no-cache  jupyter_nbextensions_configurator && \
+#    pip3 install git+https://github.com/NII-cloud-operation/Jupyter-LC_index
 
-RUN jupyter nbextensions_configurator enable --sys-prefix  && \
-    jupyter nbextension install --py  notebook_index --sys-prefix && \
-    jupyter nbextension enable --py  notebook_index --sys-prefix
+#RUN jupyter nbextensions_configurator enable --sys-prefix  && \
+#    jupyter nbextension install --py  notebook_index --sys-prefix && \
+#    jupyter nbextension enable --py  notebook_index --sys-prefix
 
 #
 # Install Yaml Widgets
