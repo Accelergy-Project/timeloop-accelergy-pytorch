@@ -15,11 +15,11 @@
 #   DOCKER_PASS=<password of uesr where image will be pushed>
 #
 DOCKER_EXE ?= docker
-DOCKER_NAME ?= mitdlh
+DOCKER_NAME ?= timeloopaccelergy
 
-VERSION := 0.1
+VERSION := 0.2
 
-USER    := mitdlh
+USER    := timeloopaccelergy
 REPO    := timeloop-accelergy-pytorch
 
 NAME    := ${USER}/${REPO}
