@@ -1,5 +1,5 @@
 ARG ARCH="amd64"
-FROM timeloopaccelergy/accelergy-timeloop-infrastructure:latest-${ARCH}
+FROM timeloopaccelergy/accelergy-timeloop-infrastructure:raella-pim-${ARCH}
 
 LABEL maintainer="timeloop-accelergy@mit.edu"
 
@@ -99,6 +99,7 @@ WORKDIR /home/workspace/
 # Install Yaml Widgets
 #
 RUN python3 -m pip install git+https://github.com/jsemer/yamlwidgets
+RUN python3 -m pip install tqdm
 
 EXPOSE 8888
 
