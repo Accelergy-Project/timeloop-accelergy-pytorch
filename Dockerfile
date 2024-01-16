@@ -78,7 +78,7 @@ RUN echo "**** install required packages ****" && \
 
 
 RUN python3 -m pip install git+https://github.com/FPSG-UIUC/fibertree.git@metrics
-RUN python3 -m pip install git+https://github.com/FPSG-UIUC/teaal-compiler.git@modeling
+RUN python3 -m pip install git+https://github.com/FPSG-UIUC/teaal-compiler.git
 
 
 #
