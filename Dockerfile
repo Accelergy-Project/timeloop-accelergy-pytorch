@@ -50,7 +50,7 @@ RUN echo "**** create container user and make folders ****" && \
 RUN pip3 install pandas seaborn numpy scipy matplotlib ipykernel jupyter && \
     pip3 install plyplus pyyaml
 
-RUN pip3 install torch==1.13.0 torchvision==0.14.0 torchaudio==2.1.2+cpu \
+RUN pip3 install torch==1.13.0 torchvision==0.14.0 torchaudio==2.1.2 \
     --extra-index-url https://download.pytorch.org/whl/cpu
 
 RUN python3 -m pip install torchprofile
