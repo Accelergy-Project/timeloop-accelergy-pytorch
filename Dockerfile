@@ -24,21 +24,6 @@ ENV SRC_DIR=/usr/local/src
 ENV LIB_DIR=/usr/local/lib
 ENV BIN_DIR=/usr/local/bin
 
-#
-# Set version for s6 overlay
-#
-ARG OVERLAY_VERSION="v2.1.0.2"
-ARG OVERLAY_ARCH="amd64"
-
-#
-# Add s6 overlay (until it is added to accelergy-timeloop-infrastructure)
-#
-ADD https://github.com/just-containers/s6-overlay/releases/download/${OVERLAY_VERSION}/s6-overlay-${OVERLAY_ARCH}-installer /tmp/
-
-RUN chmod +x /tmp/s6-overlay-${OVERLAY_ARCH}-installer && \
-    /tmp/s6-overlay-${OVERLAY_ARCH}-installer / && \
-    rm /tmp/s6-overlay-${OVERLAY_ARCH}-installer
-
 RUN echo "**** create container user and make folders ****" && \
     userdel workspace && \
     useradd -u 911 -U -d /home/workspace -s /bin/bash workspace && \
@@ -51,7 +36,7 @@ RUN pip3 install pandas seaborn numpy scipy matplotlib ipykernel jupyter && \
     pip3 install plyplus pyyaml && \
     pip3 install tqdm matplotlib svgutils
 
-RUN pip3 install torch==1.13.0 torchvision==0.14.0 torchaudio==2.1.2 \
+RUN pip3 install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 \
     --extra-index-url https://download.pytorch.org/whl/cpu
 
 RUN python3 -m pip install torchprofile
@@ -69,7 +54,7 @@ RUN echo "**** install required packages ****" && \
     apt-get install -y --no-install-recommends \
                libgl1 \
                fonts-freefont-ttf \
-               ttf-dejavu-core && \
+               fonts-dejavu && \
     echo "**** cleanup ****" && \
     apt-get clean && \
     rm -rf \
